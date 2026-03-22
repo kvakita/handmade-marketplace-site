@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Админка</title>
+  <title>Панель управления</title>
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
@@ -13,81 +13,202 @@
       <nav class="nav">
         <a href="/index.html">Главная</a>
         <a href="/catalog.html">Каталог</a>
-        <a href="/admin.html">Админка</a>
+        <a href="/admin.html">Панель управления</a>
       </nav>
     </div>
   </header>
 
-  <main class="section">
+  <main class="section admin-page">
     <div class="container">
-      <h1>Локальная админка</h1>
-      
+      <section class="admin-hero card">
+        <div>
+          <p class="admin-kicker">Управление сайтом</p>
+          <h1>Панель управления</h1>
+          <p class="admin-subtitle">
+            Здесь можно редактировать категории, товары, мастеров, новости, отзывы и контакты продавца.
+          </p>
+        </div>
+      </section>
 
-      <div class="admin-grid">
-        <div class="card">
-          <h2>Добавить товар</h2>
-          <form class="form" id="product-form">
-            <input name="title" placeholder="Название" required />
-            <input name="category" placeholder="Категория" required />
-            <input name="subcategory" placeholder="Подкатегория" required />
-            <input name="materials" placeholder="Материалы через запятую" required />
-            <textarea name="description" placeholder="Описание" required></textarea>
-            <input name="price" type="number" placeholder="Цена" required />
-            <input name="productionTime" placeholder="Срок изготовления" required />
-            <select name="status" required>
-              <option value="В наличии">В наличии</option>
-              <option value="На заказ">На заказ</option>
-              <option value="Портфолио">Портфолио</option>
-            </select>
-            <input name="stock" type="number" placeholder="Количество" required />
-            <input name="options" placeholder="Варианты через запятую" />
-            <input name="masterId" type="number" placeholder="ID мастера" required />
-            <input name="images" placeholder="Ссылки на фото через запятую" required />
-            <button class="button" type="submit">Добавить товар</button>
-          </form>
+      <section class="admin-section">
+        <div class="admin-section-header">
+          <h2>Контакты продавца</h2>
+          <p>Эти контакты будут показываться на сайте и в карточках товаров.</p>
         </div>
 
-        <div class="card">
-          <h2>Добавить категорию</h2>
-          <form class="form" id="category-form">
-            <input name="name" placeholder="Название категории" required />
-            <input name="subcategories" placeholder="Подкатегории через запятую" />
+        <div class="card admin-card">
+          <form class="form admin-form" id="seller-form">
+            <div class="form-grid two-cols">
+              <input name="name" placeholder="Имя продавца" required />
+              <input name="email" placeholder="Email" />
+              <input name="telegram" placeholder="Ссылка на Telegram" />
+              <input name="max" placeholder="Ссылка на MAX" />
+            </div>
+
+            <textarea name="description" placeholder="Описание" required></textarea>
+
+            <button class="button" type="submit">Сохранить контакты</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <div class="admin-section-header">
+          <h2>Категории</h2>
+          <p>Добавление, редактирование и удаление категорий каталога.</p>
+        </div>
+
+        <div class="card admin-card">
+          <form class="form admin-form" id="category-form">
+            <div class="form-grid two-cols">
+              <input name="name" placeholder="Название категории" required />
+              <input name="subcategories" placeholder="Подкатегории через запятую" />
+            </div>
+
             <button class="button" type="submit">Добавить категорию</button>
           </form>
 
           <hr />
 
-          <h2>Добавить новость</h2>
-          <form class="form" id="news-form">
-            <input name="title" placeholder="Заголовок" required />
+          <div id="admin-categories" class="list admin-list"></div>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <div class="admin-section-header">
+          <h2>Товары</h2>
+          <p>Добавление товара и управление уже существующими позициями.</p>
+        </div>
+
+        <div class="card admin-card">
+          <form class="form admin-form" id="product-form">
+            <div class="form-grid two-cols">
+              <input name="title" placeholder="Название" required />
+
+              <select name="category" id="product-category" required>
+                <option value="">Выберите категорию</option>
+              </select>
+
+              <input name="subcategory" placeholder="Подкатегория" required />
+              <input name="materials" placeholder="Материалы через запятую" required />
+            </div>
+
+            <textarea name="description" placeholder="Описание" required></textarea>
+
+            <div class="form-grid three-cols">
+              <input name="price" type="number" min="0" placeholder="Цена" required />
+              <input name="productionTime" placeholder="Срок изготовления" required />
+
+              <select name="status" required>
+                <option value="В наличии">В наличии</option>
+                <option value="На заказ">На заказ</option>
+              </select>
+            </div>
+
+            <div class="form-grid three-cols">
+              <input name="stock" type="number" min="0" placeholder="Количество" required />
+              <input name="options" placeholder="Доступные варианты: цвет, размер, декор" />
+
+              <select name="masterId" id="product-master" required>
+                <option value="">Выберите мастера</option>
+              </select>
+            </div>
+
+            <div class="file-block">
+              <label>Фото товара</label>
+              <input name="productFiles" type="file" accept="image/*" multiple />
+            </div>
+
+            <button class="button" type="submit">Добавить товар</button>
+          </form>
+
+          <hr />
+
+          <div id="admin-products" class="list admin-list"></div>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <div class="admin-section-header">
+          <h2>Мастера</h2>
+          <p>Профили мастеров с фото, ролью и описанием.</p>
+        </div>
+
+        <div class="card admin-card">
+          <form class="form admin-form" id="master-form">
+            <div class="form-grid two-cols">
+              <input name="name" placeholder="Имя мастера" required />
+              <input name="role" placeholder="Роль" required />
+            </div>
+
+            <textarea name="description" placeholder="Описание" required></textarea>
+
+            <div class="file-block">
+              <label>Фото мастера</label>
+              <input name="photoFile" type="file" accept="image/*" />
+            </div>
+
+            <button class="button" type="submit">Добавить мастера</button>
+          </form>
+
+          <hr />
+
+          <div id="admin-masters" class="list admin-list"></div>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <div class="admin-section-header">
+          <h2>Новости</h2>
+          <p>Публикации, акции и обновления на сайте.</p>
+        </div>
+
+        <div class="card admin-card">
+          <form class="form admin-form" id="news-form">
+            <div class="form-grid two-cols">
+              <input name="title" placeholder="Заголовок" required />
+              <input name="date" placeholder="Дата, например 2026-03-22" required />
+            </div>
+
             <textarea name="text" placeholder="Текст новости" required></textarea>
-            <input name="date" placeholder="Дата, например 2026-03-22" required />
+
             <button class="button" type="submit">Добавить новость</button>
           </form>
 
           <hr />
 
-          <h2>Добавить отзыв</h2>
-          <form class="form" id="review-form">
-            <input name="author" placeholder="Автор" required />
+          <div id="admin-news" class="list admin-list"></div>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <div class="admin-section-header">
+          <h2>Отзывы</h2>
+          <p>Отзывы с текстом, датой и фотографией.</p>
+        </div>
+
+        <div class="card admin-card">
+          <form class="form admin-form" id="review-form">
+            <div class="form-grid two-cols">
+              <input name="author" placeholder="Автор" required />
+              <input name="date" placeholder="Дата, например 2026-03-22" required />
+            </div>
+
             <textarea name="text" placeholder="Текст отзыва" required></textarea>
-            <input name="date" placeholder="Дата, например 2026-03-22" required />
+
+            <div class="file-block">
+              <label>Фото для отзыва</label>
+              <input name="imageFile" type="file" accept="image/*" />
+            </div>
+
             <button class="button" type="submit">Добавить отзыв</button>
           </form>
-        </div>
-      </div>
 
-      <div class="admin-grid section">
-        <div class="card">
-          <h2>Товары</h2>
-          <div id="admin-products" class="list"></div>
-        </div>
+          <hr />
 
-        <div class="card">
-          <h2>Категории</h2>
-          <div id="admin-categories" class="list"></div>
+          <div id="admin-reviews" class="list admin-list"></div>
         </div>
-      </div>
+      </section>
     </div>
   </main>
 

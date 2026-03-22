@@ -3,8 +3,7 @@ let allMasters = [];
 
 function getBadgeClass(status) {
   if (status === 'В наличии') return 'badge available';
-  if (status === 'На заказ') return 'badge order';
-  return 'badge portfolio';
+  return 'badge order';
 }
 
 function renderProducts(products) {

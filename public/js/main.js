@@ -59,12 +59,13 @@ async function loadHomePage() {
     </div>
   `).join('');
 
-  reviewsList.innerHTML = reviews.map(item => `
-    <div class="card">
-      <p>“${item.text}”</p>
-      <p class="small">${item.author}, ${item.date}</p>
-    </div>
-  `).join('');
+ reviewsList.innerHTML = reviews.map(item => `
+  <div class="card review-card">
+    ${item.image ? `<img class="review-image" src="${item.image}" alt="${item.author}">` : ''}
+    <p>“${item.text}”</p>
+    <p class="small">${item.author}, ${item.date}</p>
+  </div>
+`).join('');
 
   sellerBlock.innerHTML = `
     <h2>Связаться с продавцом</h2>
