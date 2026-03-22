@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Каталог</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">Тёплая Мастерская</div>
+      <nav class="nav">
+        <a href="/index.html">Главная</a>
+        <a href="/catalog.html">Каталог</a>
+        <a href="/admin.html">Админка</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <h1>Каталог товаров</h1>
+
+      <div class="filters">
+        <select id="filter-category">
+          <option value="">Все категории</option>
+        </select>
+
+        <select id="filter-master">
+          <option value="">Все мастера</option>
+        </select>
+
+        <select id="filter-status">
+          <option value="">Все статусы</option>
+          <option value="В наличии">В наличии</option>
+          <option value="На заказ">На заказ</option>
+          <option value="Портфолио">Портфолио</option>
+        </select>
+
+        <input id="filter-material" type="text" placeholder="Материал" />
+        <input id="filter-price" type="number" placeholder="Макс. цена" />
+      </div>
+
+      <div class="product-grid" id="products-list"></div>
+    </div>
+  </main>
+
+  <script src="/js/catalog.js"></script>
+</body>
+</html>
